@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Header from "../../Components/Home/Header/Header";
-import SearchBar from "../../Components/Home/SearchBar/SearchBar";
-import blogList from "../../Components/BlogList/BlogList";
-
+import Header from "../../Components/Header/Header";
+import SearchBar from "../../Components/SearchBar/SearchBar";
+import BlogList from "../../Components/BlogList/BlogList";
+import { blogList } from "../../config/data";
+import Empty from "../../Components/Empty";
 const Home = () => {
   const [blogs, setBlogs] = useState(blogList);
   const [SearchKey, setSearchKey] = useState("");
@@ -38,6 +39,9 @@ const Home = () => {
       />
 
       {/* Blogs */}
+      <div className="xl:mx-40">
+        {!blogs.length ? <Empty /> : <BlogList blogs={blogs} />}
+      </div>
     </div>
   );
 };
