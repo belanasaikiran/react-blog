@@ -1,50 +1,47 @@
 import React, { useState } from "react";
-import Header from "../../Components/Home/Header/Header";
-import SearchBar from "../../Components/Home/SearchBar/SearchBar";
-import BlogList from "../../Components/Home/BlogList/BlogList";
+import Header from "../../Components/Header/Header";
+import SearchBar from "../../Components/SearchBar/SearchBar";
+import BlogList from "../../Components/BlogList/BlogList";
 import { blogList } from "../../config/data";
-import EmptyList from "../../Components/Common/EmptyList/EmptyList";
-
+import Empty from "../../Components/Empty";
 const Home = () => {
   const [blogs, setBlogs] = useState(blogList);
-  const [searchKey, setSearchkey] = useState("");
+  const [SearchKey, setSearchKey] = useState("");
 
-  // Search Submit
-
-  // Search for blogs by category
-  const handleSearchResults = (event) => {
+  //Search handle for blogs
+  const handleSearchResult = (event) => {
     event.preventDefault();
 
     const allBlogs = blogList;
     const filteredBlogs = allBlogs.filter((blog) =>
-      blog.category.toLocaleLowerCase().includes(searchKey.toLowerCase().trim())
+      blog.category.toLocaleLowerCase().includes(SearchKey.toLowerCase().trim())
     );
-
     setBlogs(filteredBlogs);
   };
 
+  // Clear Search
   const handleClearSearch = () => {
     setBlogs(blogList);
-    setSearchkey("");
+    setSearchKey("");
   };
 
   return (
     <div>
-      {/* Page Header */}
-
+      {/* header */}
       <Header />
 
-      {/* Search Bar */}
-
+      {/* SearchBar */}
       <SearchBar
-        value={searchKey}
+        value={SearchKey}
         clearSearch={handleClearSearch}
-        formSubmit={handleSearchResults}
-        handleSearchKey={(e) => setSearchkey(e.target.value)}
+        formSubmit={handleSearchResult}
+        handleSearchKey={(e) => setSearchKey(e.target.value)}
       />
 
-      {/* Blog List & Empty List */}
-      {!blogs.length ? <EmptyList /> : <BlogList blogs={blogs} />}
+      {/* Blogs */}
+      <div className="xl:mx-40">
+        {!blogs.length ? <Empty /> : <BlogList blogs={blogs} />}
+      </div>
     </div>
   );
 };
