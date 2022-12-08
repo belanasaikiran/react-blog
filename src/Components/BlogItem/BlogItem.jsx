@@ -16,7 +16,7 @@ const BlogItem = ({
   return (
     <div className="py-10">
       <img src={cover} alt="cover" className="w-full h-[280px] object-cover" />
-      <div className="px-2">
+      <div className="px-2 py-4">
         <h3 className="text-sky-900 font-bold text-3xl blogList-head">
           {title}
         </h3>
